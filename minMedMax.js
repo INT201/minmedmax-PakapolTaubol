@@ -2,28 +2,17 @@ const { template } = require('@babel/core')
 
 function minMedMax(n1, n2, n3) {
   //code here
-  // let min = Math.min(n1, n2, n3)
-  // let med = Math.median(n1, n2, n3)
-  // let max = Math.max(n1, n2, n3)
-  let name
-  if  (n1 > n2) {
-    name = n1 
-    n1 = n2
-    n2 = name
-  } if (n1 > n3) {
-    name = n1
-    n1 = n3
-    n3 = name
-  } if (n2 > n3) {
-    name = n2
-    n2 = n3
-    n3 = name
-  }
-  return { 'min' : n1 ,'mid' : n2 ,'max' : n3}
+  let arrno = [n1, n2, n3]; // arrno คือทำตัว n1, n2, n3 ให้อยู่ด้วยกันใน array arrno
+  let no
+    for (let i = 0; i < arrno.length; i++) { // Loop ตามจำนวนตัวใน array of arrno ( n ) n1, n2, n3
+        for (let j = i + 1; j < arrno.length; j++) { // Loop ตามจำนวนตัวใน array of arrno ( n+1 ) n2, n3
+            if (arrno[i] > arrno[j]) { // เทียบค่า arrno[0,1,2] > arrno[1,2]
+                no = arrno[i]
+                arrno[i] = arrno[j]
+                arrno[j] = no
+            }
+        }
+    }
+  return {min: arrno[0], mid: arrno[1], max: arrno[2]}
 }
-// console.log(minMedMax(85, 30, 1))
-// console.log(minMedMax(10, 0, 20))
-// console.log(minMedMax(-5, 0, 10))
-// console.log(minMedMax(5, 1, 1))
-// console.log(minMedMax(-1, -8, 0))
 module.exports = minMedMax
